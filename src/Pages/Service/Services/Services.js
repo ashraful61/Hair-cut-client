@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Service from "../Service/Service";
 
 const Services = () => {
@@ -22,6 +23,11 @@ const Services = () => {
         {services.map((service) => (
           <Service key={service._id} service={service} source="home"></Service>
         ))}
+      </div>
+      <div className="text-center my-8">
+          <Link to='/services'>
+          <button className="btn">See all</button>
+         </Link>
       </div>
     </div>
   );
