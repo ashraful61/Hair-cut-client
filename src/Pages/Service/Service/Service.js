@@ -24,7 +24,7 @@ const Service = ({ service, source }) => {
             <button className="btn btn-info">Buy Now</button>
           </Link>
           <Link to={source === 'home' ? `services/${_id}` : `../services/${_id}`}>
-            <button className="btn btn-info">Details</button>
+            <button className="btn btn-info">View Details</button>
           </Link>
         </div>
       </div>
