@@ -79,7 +79,7 @@ const Header = () => {
           <span>Hair Style</span>
         </Link>
       </div>
-      <div className="navbar-end hidden lg:flex">
+      <div className="navbar-end w-full hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
 
