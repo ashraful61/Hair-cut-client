@@ -11,5 +11,16 @@
     to right,
     #151515 0%,
     rgba(21, 21, 21, 0) 100%
-  ); /* W3C */
+  ); 
 }
+
+.carousel-image-width {
+  height: 550px;
+}
+
+@media only screen and (max-width:700px) {
+  .carousel-image-width {
+    height: 320px;
+  }
+}
+
