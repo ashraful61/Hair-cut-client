@@ -32,7 +32,7 @@ const Header = () => {
         </li>
         <li className="font-semibold">
         <Link className="border-2">
-        {user?.displayName }
+        {user?.displayName ? user?.displayName : user?.email }
         </Link>
         </li>
         <li className="font-semibold">
