@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const AddService = () => {
     const handleAddService = (event) => {
@@ -29,7 +30,13 @@ const AddService = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-
+        form.reset();
+        Swal.fire({
+          title: "Success!",
+          text: "Service added successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
       })
 
     }
