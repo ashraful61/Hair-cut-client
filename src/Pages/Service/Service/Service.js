@@ -27,11 +27,10 @@ const Service = ({ service, source }) => {
         <p>
           {description?.length >= 100 ? description.slice(0,100) + '...' : description}
         </p>
-        <div className="card-actions justify-between">
-        {/* to={`checkout/${_id}`} */}
-          <Link to={source === 'home' ? `services/${_id}` : `../services/${_id}`}>
+        <div className="card-actions justify-end">
+          {/* <Link to={source === 'home' ? `services/${_id}` : `../services/${_id}`}>
             <button className="btn btn-info">Buy Now</button>
-          </Link>
+          </Link> */}
           <Link to={source === 'home' ? `services/${_id}` : `../services/${_id}`}>
             <button className="btn btn-info">View Details</button>
           </Link>

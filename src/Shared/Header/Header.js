@@ -75,7 +75,7 @@ const Header = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost normal-case text-xl">
-          <img style={{'height':'100px'}} src={logo} alt="" />
+          <img style={{'height':'50px'}} src={logo} alt="" />
           <span>Hair Style</span>
         </Link>
       </div>

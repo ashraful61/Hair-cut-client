@@ -1,14 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Blog from "../Pages/Blog/Blog";
-import Checkout from "../Pages/Checkout/Checkout";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import MyReviews from "../Pages/MyReviews/MyReviews";
-import Orders from "../Pages/Orders/Orders";
-// import Services from "../Pages/Service/Services/Services";
 import Signup from "../Pages/Signup/Signup";
-import PrivateRoute from "./PrivateRoute";
 import AddService from "../Pages/Service/AddService/AddService";
 import AllServices from "../Pages/Service/AllServices/AllServices";
 import ServiceDetails from "../Pages/Service/ServiceDetails/ServiceDetails";
@@ -51,25 +47,6 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <MyReviews></MyReviews>
-      },
-      {
-        path: "checkout/:id",
-        element: (
-          <PrivateRoute>
-            {" "}
-            <Checkout></Checkout>
-          </PrivateRoute>
-        ),
-        loader: ({ params }) =>
-          fetch(`https://genius-car-server-nu-bice.vercel.app/services/${params.id}`),
-      },
-      {
-        path: "orders",
-        element: (
-          <PrivateRoute>
-            <Orders></Orders>
-          </PrivateRoute>
-        ),
       },
     ],
   },

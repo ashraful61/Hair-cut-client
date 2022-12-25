@@ -8,7 +8,7 @@ const ServiceDetails = () => {
   const { imgUrl, name, price, rating, description, _id } = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([])
-  console.log(_id);
+  // console.log(_id);
 
   useEffect(()=> {
     fetch(`http://localhost:5000/reviews/${_id}`)
@@ -31,7 +31,7 @@ const ServiceDetails = () => {
       reviewer_photoUrl: user?.photoURL,
       reviewer_email: user?.email,
       reviewer_name: user?.displayName,
-      review
+      comment:review,
     }
 
     fetch('http://localhost:5000/reviews', {
@@ -45,6 +45,9 @@ const ServiceDetails = () => {
     .then(data => {
       console.log(data);  
       if(data.insertedId) {
+        reqBody._id = data.insertedId;
+        setReviews([reqBody, ...reviews])
+        form.reset();
         Swal.fire({
           title: 'Success!',
           text: 'Review added successfully',

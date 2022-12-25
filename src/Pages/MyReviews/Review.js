@@ -4,7 +4,7 @@ import defaultImg from "../../assets/images/person.png"
 const Review = ({review}) => {
     const { photoUrl, comment, reviewer_name,  reviewer_email } = review
     return (
-        <div className="chat chat-start border-b-2 border-indigo-500">
+        <div className="chat chat-start border-2 border-indigo-500 mb-3 rounded">
         <div className="chat-image avatar">
           <div className="w-10 rounded-full">
             {
