@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import loginImg from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../contexts/AuthProvider";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
@@ -20,6 +19,7 @@ const Login = () => {
         .then(result => {
           const user = result.user;
           console.log(user);
+          navigate(from, { replace: true });
           // fetch('https://genius-car-server-nu-bice.vercel.app/jwt', {
           //   method: 'POST',
           //   headers: {
@@ -42,10 +42,11 @@ const Login = () => {
     <div className="hero w-full my-20">
       <div className="hero-content grid md:grid-cols-2 flex-col lg:flex-row gap-20">
         <div className="text-center lg:text-left">
-          <img className="w-3/4" src={loginImg} alt="" />
+          {/* <img className="w-3/4" src={loginImg} alt="" /> */}
+          <h1 className="text-center text-5xl font-bold">Login Here</h1>
         </div>
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 my-20 py-20">
-          <h1 className="text-center text-5xl font-bold">Login</h1>
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 my-20 py-10">
+      
           <form onSubmit={handleLogin} className="card-body">
             <div className="form-control">
               <label className="label">

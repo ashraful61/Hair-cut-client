@@ -4,7 +4,7 @@ export const setAuthToken = (user) => {
         email: user.email
     }
 
-    fetch('https://genius-car-server-nu-bice.vercel.app/jwt', {
+    fetch('http://localhost:5000/jwt', {
         method: 'POST',
         headers: {
           "content-type":"application/json"
