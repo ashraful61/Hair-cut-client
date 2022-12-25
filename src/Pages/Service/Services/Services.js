@@ -6,7 +6,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/services?limit=3`)
+    fetch(`https://server-fawn-pi.vercel.app/services?limit=3`)
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);

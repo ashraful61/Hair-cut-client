@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "services",
-        loader: async () => fetch('http://localhost:5000/services'),
+        loader: async () => fetch('https://server-fawn-pi.vercel.app/services'),
         element: <AllServices></AllServices>,
       },
       {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "services/:id",
-        loader: async ({params}) => fetch(`http://localhost:5000/services/${params.id}`),
+        loader: async ({params}) => fetch(`https://server-fawn-pi.vercel.app/services/${params.id}`),
         element: <ServiceDetails></ServiceDetails>
       },
       {

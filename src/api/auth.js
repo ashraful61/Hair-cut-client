@@ -4,7 +4,7 @@ export const setAuthToken = (user) => {
         email: user.email
     }
 
-    fetch('http://localhost:5000/jwt', {
+    fetch('https://server-fawn-pi.vercel.app/jwt', {
         method: 'POST',
         headers: {
           "content-type":"application/json"

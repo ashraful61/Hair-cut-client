@@ -7,7 +7,7 @@ const MyReviews = () => {
     const [reviews, setReviews] = useState([]);
   
     useEffect(()=> {
-      fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+      fetch(`https://server-fawn-pi.vercel.app/reviews?email=${user?.email}`)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -17,6 +17,9 @@ const MyReviews = () => {
 
     return (
         <div>
+          {
+            !reviews.length && <p>No reviews was found</p>
+          }
            {
             reviews?.map(review => <Review key={review._id} review={review}></Review>)
            }
