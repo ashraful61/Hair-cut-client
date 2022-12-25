@@ -21,13 +21,13 @@ const Signup = () => {
 
     }
     return (
-        <div className="hero w-full my-20">
+        <div className="hero w-full">
           <div className="hero-content grid md:grid-cols-2 flex-col lg:flex-row gap-20">
             <div className="text-center lg:text-left">
               {/* <img className="w-3/4" src={loginImg} alt="" /> */}
                      <h1 className="text-center text-5xl font-bold">Sign Up</h1>
             </div>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 my-20 py-20">
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 my-10 py-10">
       
               <form onSubmit={handleSignup} className="card-body">
               <div className="form-control">

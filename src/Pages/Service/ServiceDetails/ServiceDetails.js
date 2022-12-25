@@ -81,11 +81,6 @@ const ServiceDetails = () => {
                 <button className="btn btn-info">Submit</button>
               </form>
             </div>
-
-            {!reviews.length && <p>No reviews was found</p>}
-            {reviews?.map((review) => (
-              <Review key={review._id} review={review}></Review>
-            ))}
           </div>
         ) : (
           <>
@@ -95,6 +90,13 @@ const ServiceDetails = () => {
             </Link>
             &nbsp;
             first to add a review
+
+            <div className="my-8">
+            {!reviews.length && <p>No reviews was found</p>}
+            {reviews?.map((review) => (
+              <Review key={review._id} review={review}></Review>
+            ))}
+            </div>
           </>
         )}
       </div>
