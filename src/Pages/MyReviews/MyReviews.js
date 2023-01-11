@@ -25,7 +25,7 @@ const MyReviews = () => {
   };
 
   const deleteOperation = (id) => {
-    fetch(`http://localhost:5000/reviews/${id}`, {
+    fetch(`https://server-fawn-pi.vercel.app/reviews/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const MyReviews = () => {
 
   return (
     <div>
-      {!reviews.length && <p>No reviews was found</p>}
+      {!reviews.length && <h1 className="text-4xl mt-4 mb-8 text-center">No reviews was found!</h1>}
 
       {reviews?.map((review) => (
         <Review

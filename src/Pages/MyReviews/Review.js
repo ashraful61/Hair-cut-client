@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import defaultImg from "../../assets/images/person.png";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Review = ({ review, handleDeleteReview }) => {
   const { photoUrl, comment, reviewer_name, reviewer_email, _id } = review;
-
+  const { user } = useContext(AuthContext);
 
 
   return (
@@ -27,10 +28,13 @@ const Review = ({ review, handleDeleteReview }) => {
         </div>
       </div>
       &nbsp;
-      <div style={{ 'width': "200px", }}>
+      {
+        user?.email === reviewer_email &&
+        <div style={{ 'width': "200px", }}>
         <button className="btn btn-info">Edit</button> &nbsp;
         <button onClick={() => handleDeleteReview(_id)} className="btn btn-error">Delete</button>
       </div>
+      } 
     </div>
   );
 };

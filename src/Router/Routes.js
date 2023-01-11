@@ -8,6 +8,7 @@ import Signup from "../Pages/Signup/Signup";
 import AddService from "../Pages/Service/AddService/AddService";
 import AllServices from "../Pages/Service/AllServices/AllServices";
 import ServiceDetails from "../Pages/Service/ServiceDetails/ServiceDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addService",
-        element: <AddService></AddService>
+        element: <PrivateRoute><AddService></AddService></PrivateRoute> 
       },
       {
         path: "services/:id",
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "reviews",
-        element: <MyReviews></MyReviews>
+        element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
       },
     ],
   },

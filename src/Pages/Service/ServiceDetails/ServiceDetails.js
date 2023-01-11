@@ -11,7 +11,7 @@ const ServiceDetails = () => {
   // console.log(_id);
 
   useEffect(() => {
-    fetch(`https://server-fawn-pi.vercel.app/reviews/${_id}`)
+    fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -19,11 +19,14 @@ const ServiceDetails = () => {
       });
   }, [_id]);
 
+
   const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
     const review = form.review.value;
     console.log(review);
+    if (!review) {
+    }
 
     const reqBody = {
       service_id: _id,
@@ -85,20 +88,23 @@ const ServiceDetails = () => {
         ) : (
           <>
             Please &nbsp;
-            <Link className="underline" to='/login'>
-              login 
+            <Link className="underline" to="/login">
+              login
             </Link>
-            &nbsp;
-            first to add a review
-
-            <div className="my-8">
-            {!reviews.length && <p>No reviews was found</p>}
-            {reviews?.map((review) => (
-              <Review key={review._id} review={review}></Review>
-            ))}
-            </div>
+            &nbsp; first to add a review
           </>
         )}
+
+        <div className="my-8">
+          {!reviews.length && (
+            <h1 className="text-4xl mt-4 mb-8 text-center">
+              No reviews was found!
+            </h1>
+          )}
+          {reviews?.map((review) => (
+            <Review key={review._id} review={review}></Review>
+          ))}
+        </div>
       </div>
     </div>
   );
