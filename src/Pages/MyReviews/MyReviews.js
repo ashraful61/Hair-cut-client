@@ -8,12 +8,18 @@ const override = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  // backgroundColor: 'red'
 };
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const handleDeleteReview = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -31,11 +37,12 @@ const MyReviews = () => {
   };
 
   const deleteOperation = (id) => {
+    setLoading(true);
     fetch(`https://server-fawn-pi.vercel.app/reviews/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+        authorization: `Bearer ${localStorage.getItem("hairCutToken")}`,
       },
     })
       .then((res) => res.json())
@@ -47,17 +54,21 @@ const MyReviews = () => {
             (review) => review._id !== id
           );
           setReviews(remainingReviews);
+          setLoading(false);
           Swal.fire("Deleted!", "Your Review has been deleted.", "success");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
-    fetch(`https://server-fawn-pi.vercel.app/reviews?email=${user?.email}`,{
+    fetch(`https://server-fawn-pi.vercel.app/reviews?email=${user?.email}`, {
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+        authorization: `Bearer ${localStorage.getItem("hairCutToken")}`,
       },
     })
       .then((res) => res.json())
@@ -85,15 +96,16 @@ const MyReviews = () => {
         ></Review>
       ))}
 
-      
-
-      <ClockLoader
-        color="#36d7b7"
-        aria-label="Loading Spinner"
-        data-testid="loader"
-        loading={loading}
-        cssOverride={override}
-      />
+      <div className="w-full h-full relative">
+        <ClockLoader
+          color="#36d7b7"
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          loading={loading}
+          cssOverride={override}
+          size={150}
+        />
+      </div>
     </div>
   );
 };

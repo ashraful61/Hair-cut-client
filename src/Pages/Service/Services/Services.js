@@ -4,6 +4,7 @@ import Service from "../Service/Service";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  
 
   useEffect(() => {
     fetch(`https://server-fawn-pi.vercel.app/services?limit=3`)

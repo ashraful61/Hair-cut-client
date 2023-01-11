@@ -6,12 +6,12 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const Signup = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
     const handleSignup = (event) => {
         event.preventDefault();
         const form = event.target;
-        // const name = form.name.value;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
         createUser(email, password)
@@ -25,7 +25,16 @@ const Signup = () => {
             icon: "success",
             confirmButtonText: "Ok",
           });
-          navigate('/');
+          
+          const userInfo = {
+            displayName: name
+          };
+          updateUser(userInfo)
+            .then(() => {
+                navigate('/');
+            })
+            .catch((err) => console.log(err));
+        
           
         })
         .catch(err=>console.log(err))

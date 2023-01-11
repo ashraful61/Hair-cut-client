@@ -3,12 +3,39 @@ import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import Review from "../../MyReviews/Review";
+import { ClockLoader } from "react-spinners";
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+  // backgroundColor: 'red'
+};
 
 const ServiceDetails = () => {
   const { imgUrl, name, price, rating, description, _id } = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
- 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("hairCutToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setReviews(data);
+        setLoading(false);
+      });
+  }, [_id]);
 
   const handleDeleteReview = (id) => {
     Swal.fire({
@@ -27,11 +54,12 @@ const ServiceDetails = () => {
   };
 
   const deleteOperation = (id) => {
+    setLoading(true);
     fetch(`https://server-fawn-pi.vercel.app/reviews/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+        authorization: `Bearer ${localStorage.getItem("hairCutToken")}`,
       },
     })
       .then((res) => res.json())
@@ -43,26 +71,15 @@ const ServiceDetails = () => {
             (review) => review._id !== id
           );
           setReviews(remainingReviews);
+          setLoading(false);
           Swal.fire("Deleted!", "Your Review has been deleted.", "success");
         }
       })
-      .catch((err) => console.log(err));
-  };
-
-
-  useEffect(() => {
-    fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`,{
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setReviews(data);
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
       });
-  }, [_id]);
+  };
 
   const handleAddReview = (event) => {
     event.preventDefault();
@@ -80,12 +97,12 @@ const ServiceDetails = () => {
       reviewer_name: user?.displayName,
       comment: review,
     };
-
+    setLoading(true);
     fetch("https://server-fawn-pi.vercel.app/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+        authorization: `Bearer ${localStorage.getItem("hairCutToken")}`,
       },
       body: JSON.stringify(reqBody),
     })
@@ -96,6 +113,7 @@ const ServiceDetails = () => {
           reqBody._id = data.insertedId;
           setReviews([reqBody, ...reviews]);
           form.reset();
+          setLoading(false);
           Swal.fire({
             title: "Success!",
             text: "Review added successfully",
@@ -146,6 +164,16 @@ const ServiceDetails = () => {
               No reviews was found!
             </h1>
           )}
+          <div className="w-full h-full relative">
+            <ClockLoader
+              color="#36d7b7"
+              aria-label="Loading Spinner"
+              data-testid="loader"
+              loading={loading}
+              cssOverride={override}
+              size={150}
+            />
+          </div>
           {reviews?.map((review) => (
             <Review
               isServiceNameShowing={false}
