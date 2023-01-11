@@ -1,7 +1,7 @@
 export const setAuthToken = (user) => {
 
     const currentUser = {
-        email: user.email
+        email: user?.email
     }
 
     fetch('https://server-fawn-pi.vercel.app/jwt', {

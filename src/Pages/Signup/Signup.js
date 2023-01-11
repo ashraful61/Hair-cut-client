@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-// import loginImg from "../../assets/images/login/login.svg";
+import { setAuthToken } from '../../api/auth';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
@@ -17,14 +17,15 @@ const Signup = () => {
         createUser(email, password)
         .then(result =>{
           const user = result.user;
-          console.log(user)
+          console.log(user);
+          setAuthToken(user);
           Swal.fire({
             title: "Success!",
             text: "User created successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
-          navigate('/')
+          navigate('/');
           
         })
         .catch(err=>console.log(err))

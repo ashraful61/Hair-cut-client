@@ -8,7 +8,47 @@ const ServiceDetails = () => {
   const { imgUrl, name, price, rating, description, _id } = useLoaderData();
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  // console.log(_id);
+ 
+
+  const handleDeleteReview = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want delete this review?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteOperation(id);
+      }
+    });
+  };
+
+  const deleteOperation = (id) => {
+    fetch(`https://server-fawn-pi.vercel.app/reviews/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data?.deletedCount) {
+          const remainingReviews = reviews.filter(
+            (review) => review._id !== id
+          );
+          setReviews(remainingReviews);
+          Swal.fire("Deleted!", "Your Review has been deleted.", "success");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
 
   useEffect(() => {
     fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`)
@@ -105,6 +145,7 @@ const ServiceDetails = () => {
               isServiceNameShowing={false}
               key={review._id}
               review={review}
+              handleDeleteReview={handleDeleteReview}
             ></Review>
           ))}
         </div>

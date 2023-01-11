@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import { AuthContext } from "../../contexts/AuthProvider";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
@@ -19,6 +20,7 @@ const Login = () => {
         .then(result => {
           const user = result.user;
           console.log(user);
+          setAuthToken(user)
           navigate(from, { replace: true });
           // fetch('https://genius-car-server-nu-bice.vercel.app/jwt', {
           //   method: 'POST',

@@ -35,7 +35,7 @@ const MyReviews = () => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
       },
     })
       .then((res) => res.json())

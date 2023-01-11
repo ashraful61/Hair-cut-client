@@ -23,7 +23,8 @@ const AddService = () => {
     fetch('https://server-fawn-pi.vercel.app/services', {
         method: 'POST',
         headers: {
-          "content-type":"application/json"
+          "content-type":"application/json",
+          authorization: `Bearer ${localStorage.getItem('hairCutToken')}`,
         },
         body: JSON.stringify(reqBody)
       })
@@ -31,12 +32,22 @@ const AddService = () => {
       .then(data => {
         console.log(data);
         form.reset();
-        Swal.fire({
-          title: "Success!",
-          text: "Service added successfully",
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
+         if(data.insertedId){
+          Swal.fire({
+            title: "Success!",
+            text: "Service added successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+         }
+         else {
+          Swal.fire({
+            title: "Error!",
+            text: "You need to login first",
+            icon: "error",
+            confirmButtonText: "Ok",
+          });
+         }
       })
 
     }

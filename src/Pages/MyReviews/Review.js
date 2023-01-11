@@ -29,7 +29,7 @@ const Review = ({ review, handleDeleteReview, isServiceNameShowing  }) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          // authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+          authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
         },
         body: JSON.stringify({comment: text})
       })
