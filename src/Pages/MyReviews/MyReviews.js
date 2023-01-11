@@ -54,7 +54,12 @@ const MyReviews = () => {
   };
 
   useEffect(() => {
-    fetch(`https://server-fawn-pi.vercel.app/reviews?email=${user?.email}`)
+    fetch(`https://server-fawn-pi.vercel.app/reviews?email=${user?.email}`,{
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

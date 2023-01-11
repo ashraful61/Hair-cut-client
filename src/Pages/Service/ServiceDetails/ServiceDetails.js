@@ -51,7 +51,12 @@ const ServiceDetails = () => {
 
 
   useEffect(() => {
-    fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`)
+    fetch(`https://server-fawn-pi.vercel.app/getReviewsByServiceId/${_id}`,{
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -79,7 +84,8 @@ const ServiceDetails = () => {
     fetch("https://server-fawn-pi.vercel.app/reviews", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('hairCutToken')}`
       },
       body: JSON.stringify(reqBody),
     })
