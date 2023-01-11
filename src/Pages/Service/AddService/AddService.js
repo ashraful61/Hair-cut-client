@@ -42,7 +42,7 @@ const AddService = () => {
     }
   return (
     <div>
-      <form onSubmit={handleAddService} className="card-body w-1/2">
+      <form onSubmit={handleAddService} className="card-body w-full md:w-1/2 mx-auto mb-8">
         <div className="form-control">
           <label className="label">
             <span className="label-text">name</span>
