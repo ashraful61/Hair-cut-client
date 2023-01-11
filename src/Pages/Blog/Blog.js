@@ -29,7 +29,7 @@ const Blog = () => {
         programming language
       </p>
       <h1 className="text-2xl py-3 font-bold">
-        How does Nodejs handle multiple request at the same time??
+        How does Nodejs handle multiple request at the same time?
       </h1>
       <p>
         {" "}

@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
+import ClockLoader from "react-spinners/ClockLoader";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Review from "./Review";
 
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  
-
+  const [loading, setLoading] = useState(true);
   const handleDeleteReview = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -53,23 +59,36 @@ const MyReviews = () => {
       .then((data) => {
         console.log(data);
         setReviews(data);
+        setLoading(false);
       });
   }, [user?.email]);
 
   return (
     <div>
-      {!reviews.length && <h1 className="text-4xl mt-4 mb-8 text-center">No reviews was found!</h1>}
+      {!reviews.length && (
+        <h1 className="text-4xl mt-4 mb-8 text-center">
+          No reviews was found!
+        </h1>
+      )}
 
       {reviews?.map((review) => (
         <Review
           key={review._id}
           review={review}
+          isServiceNameShowing={true}
           handleDeleteReview={handleDeleteReview}
         ></Review>
       ))}
 
+      
 
-
+      <ClockLoader
+        color="#36d7b7"
+        aria-label="Loading Spinner"
+        data-testid="loader"
+        loading={loading}
+        cssOverride={override}
+      />
     </div>
   );
 };

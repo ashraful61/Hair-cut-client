@@ -19,7 +19,6 @@ const ServiceDetails = () => {
       });
   }, [_id]);
 
-
   const handleAddReview = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -102,7 +101,11 @@ const ServiceDetails = () => {
             </h1>
           )}
           {reviews?.map((review) => (
-            <Review key={review._id} review={review}></Review>
+            <Review
+              isServiceNameShowing={false}
+              key={review._id}
+              review={review}
+            ></Review>
           ))}
         </div>
       </div>
